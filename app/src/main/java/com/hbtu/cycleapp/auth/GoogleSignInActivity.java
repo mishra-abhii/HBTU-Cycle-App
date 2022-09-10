@@ -90,7 +90,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
                     } else {
                         progressDialog.dismiss();
                         gsc.signOut();
-                        finish();
                         Toast.makeText(GoogleSignInActivity.this, "Please use your college mail-id", Toast.LENGTH_SHORT).show();
                     }
                 }
