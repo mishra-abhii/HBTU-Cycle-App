@@ -22,9 +22,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.hbtu.cycleapp.MainActivity;
 import com.hbtu.cycleapp.R;
+import com.hbtu.cycleapp.model.User;
 
 import java.util.Objects;
 
@@ -33,7 +37,8 @@ public class GoogleSignInActivity extends AppCompatActivity {
     public static final int RC_SIGN_IN = 100;
     GoogleSignInClient gsc;
     FirebaseAuth mAuth;
-    String email;
+    DatabaseReference mRef;
+    String name, email, branch, roll_no, year;
 
     Button btnSignIn;
     ProgressDialog progressDialog;
@@ -108,8 +113,8 @@ public class GoogleSignInActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             progressDialog.dismiss();
-//                            String currentUser = mAuth.getCurrentUser().getUid();
-//                            updateUI(currentUser);
+                            updateUserInfo();
+
                             Intent intent = new Intent(GoogleSignInActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -121,6 +126,74 @@ public class GoogleSignInActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void updateUserInfo() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String currentUserId;
+
+        if(currentUser!=null){
+            currentUserId = currentUser.getUid();
+            mRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+
+            GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+            if(account!=null){
+
+                name = account.getGivenName();
+                email = account.getEmail();
+
+                assert email != null;
+                String branchCode = email.substring(4, 6);
+                if(branchCode.equals("01")){
+                    branch = "";
+                }
+                if(branchCode.equals("02")){
+                    branch = "";
+                }
+                if(branchCode.equals("03")){
+                    branch = "";
+                }
+                if(branchCode.equals("04")){
+                    branch = "";
+                }
+                if(branchCode.equals("05")){
+                    branch = "";
+                }
+                if(branchCode.equals("06")){
+                    branch = "";
+                }
+                if(branchCode.equals("07")){
+                    branch = "";
+                }
+                if(branchCode.equals("08")){
+                    branch = "Information Technology";
+                }
+                if(branchCode.equals("09")){
+                    branch = "";
+                }
+                if(branchCode.equals("10")){
+                    branch = "";
+                }
+                if(branchCode.equals("11")){
+                    branch = "";
+                }
+                if(branchCode.equals("12")){
+                    branch = "";
+                }
+                if(branchCode.equals("13")){
+                    branch = "";
+                }
+
+                roll_no = email.substring(0, 9);
+
+                String yearCode = email.substring(0, 2);
+                int yearCode1 = Integer.parseInt(yearCode)+4;
+                year = ("20"+yearCode + "-" + "20"+yearCode1);
+
+                User user = new User(name, email, branch, roll_no, year);
+                mRef.setValue(user);
+            }
+        }
     }
 
     public boolean validateEmail(String email) {
