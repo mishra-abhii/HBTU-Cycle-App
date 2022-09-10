@@ -95,7 +95,8 @@ public class GoogleSignInActivity extends AppCompatActivity {
                 }
             } catch (ApiException e) {
                 progressDialog.dismiss();
-                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Select Email-Id to continue", Toast.LENGTH_SHORT).show();
                 finish();
             }
         }
@@ -174,10 +175,10 @@ public class GoogleSignInActivity extends AppCompatActivity {
                     branch = "Mechanical Engineering";
                 }
                 if(branchCode.equals("11")){
-                    branch = "Plastic Technology";
+                    branch = "Oil Technology";
                 }
                 if(branchCode.equals("12")){
-                    branch = "Oil Technology";
+                    branch = "Plastic Technology";
                 }
                 if(branchCode.equals("13")){
                     branch = "Paint Technology";
