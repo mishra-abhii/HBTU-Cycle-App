@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //To blend Actionbar with layout. Removing its elevation shadow.
+        getSupportActionBar().setElevation(0);
+
         mAuth = FirebaseAuth.getInstance();
 
 
