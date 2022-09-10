@@ -14,6 +14,9 @@
         android:theme="@style/Theme.HBTUCycleApp"
         tools:targetApi="31">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>

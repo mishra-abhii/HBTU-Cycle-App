@@ -145,43 +145,43 @@ public class GoogleSignInActivity extends AppCompatActivity {
                 assert email != null;
                 String branchCode = email.substring(4, 6);
                 if(branchCode.equals("01")){
-                    branch = "";
+                    branch = "Bio-Chemical Engineering";
                 }
                 if(branchCode.equals("02")){
-                    branch = "";
+                    branch = "Civil Engineering";
                 }
                 if(branchCode.equals("03")){
-                    branch = "";
+                    branch = "Chemical Engineering";
                 }
                 if(branchCode.equals("04")){
-                    branch = "";
+                    branch = "Computer Science Engineering";
                 }
                 if(branchCode.equals("05")){
-                    branch = "";
+                    branch = "Electrical Engineering";
                 }
                 if(branchCode.equals("06")){
-                    branch = "";
+                    branch = "Electronics Engineering";
                 }
                 if(branchCode.equals("07")){
-                    branch = "";
+                    branch = "Food Technology";
                 }
                 if(branchCode.equals("08")){
                     branch = "Information Technology";
                 }
                 if(branchCode.equals("09")){
-                    branch = "";
+                    branch = "Leather Technology";
                 }
                 if(branchCode.equals("10")){
-                    branch = "";
+                    branch = "Mechanical Engineering";
                 }
                 if(branchCode.equals("11")){
-                    branch = "";
+                    branch = "Plastic Technology";
                 }
                 if(branchCode.equals("12")){
-                    branch = "";
+                    branch = "Oil Technology";
                 }
                 if(branchCode.equals("13")){
-                    branch = "";
+                    branch = "Paint Technology";
                 }
 
                 roll_no = email.substring(0, 9);
