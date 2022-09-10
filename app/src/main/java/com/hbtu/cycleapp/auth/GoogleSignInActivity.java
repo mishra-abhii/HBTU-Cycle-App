@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
     public static final int RC_SIGN_IN = 100;
     GoogleSignInClient gsc;
     FirebaseAuth mAuth;
+    String email;
 
     Button btnSignIn;
     ProgressDialog progressDialog;
@@ -70,25 +72,24 @@ public class GoogleSignInActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == RC_SIGN_IN){
+        if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
-            try{
+            try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                if(account!= null){
-                    String email = account.getEmail();
-                    if(Objects.equals(email, "200108010@hbtu.ac.in")){
+                if (account != null) {
+                    email = account.getEmail();
+                    assert email != null;
+                    if (validateEmail(email)) {
                         firebaseAuthWithGoogle(account.getIdToken());
-                    }
-                    else{
+                    } else {
                         progressDialog.dismiss();
                         gsc.signOut();
                         finish();
                         Toast.makeText(GoogleSignInActivity.this, "Please use your college mail-id", Toast.LENGTH_SHORT).show();
                     }
                 }
-            }
-            catch (ApiException e){
+            } catch (ApiException e) {
                 progressDialog.dismiss();
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 finish();
@@ -104,7 +105,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
 
                             progressDialog.dismiss();
 //                            String currentUser = mAuth.getCurrentUser().getUid();
@@ -113,8 +114,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
 
-                        }
-                        else{
+                        } else {
                             progressDialog.dismiss();
                             Toast.makeText(GoogleSignInActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                             finish();
@@ -123,4 +123,16 @@ public class GoogleSignInActivity extends AppCompatActivity {
                 });
     }
 
+    public boolean validateEmail(String email) {
+        boolean endsWithDomain = email.endsWith("hbtu.ac.in");
+        return endsWithDomain && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
+    }
 }
