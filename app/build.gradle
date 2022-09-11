@@ -45,4 +45,7 @@ dependencies {
 
     //qrcode - code scanner lib dependency
     implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
+
+    // FirebaseUI for Firebase Realtime Database
+    implementation 'com.firebaseui:firebase-ui-database:8.0.1'
 }
