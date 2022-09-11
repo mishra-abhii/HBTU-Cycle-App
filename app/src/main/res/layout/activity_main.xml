@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/topLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -29,5 +30,18 @@
             android:padding="8dp"/>
 
     </LinearLayout>
+    
+    <com.budiyev.android.codescanner.CodeScannerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/codescanner"
+        app:layout_constraintTop_toBottomOf="@id/topLL"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:autoFocusButtonColor="@color/white"
+        app:flashButtonColor="@color/white"
+        app:flashButtonVisible="true"
+        app:maskColor="#80000000"
+        app:autoFocusButtonVisible="true"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
