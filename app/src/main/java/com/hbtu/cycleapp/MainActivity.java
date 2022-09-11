@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase db;
     DatabaseReference ref;
     boolean booked;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     cycleNumberForCurrentUsr[0] = Objects.requireNonNull(snapshot.child("cycleTaken").getValue()).toString();
+                    email = Objects.requireNonNull(snapshot.child("email").getValue()).toString();
 
                     if (!cycleNumberForCurrentUsr[0].equals("-1")) {
                         Intent intent = new Intent(MainActivity.this, RideBookedActivity.class);

@@ -205,7 +205,8 @@ public class GoogleSignInActivity extends AppCompatActivity {
 
     public boolean validateEmail(String email) {
         boolean endsWithDomain = email.endsWith("hbtu.ac.in");
-        return endsWithDomain && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        return (endsWithDomain || email.equals("abhimishra2775@gmail.com") || email.equals("spandey4122@gmail.com")) && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+
     }
 
     @Override
