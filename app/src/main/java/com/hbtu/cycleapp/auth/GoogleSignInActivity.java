@@ -50,6 +50,8 @@ public class GoogleSignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_sign_in);
 
+        getSupportActionBar().hide();
+
         mAuth = FirebaseAuth.getInstance();
         btnSignIn = findViewById(R.id.btnLogin);
 
