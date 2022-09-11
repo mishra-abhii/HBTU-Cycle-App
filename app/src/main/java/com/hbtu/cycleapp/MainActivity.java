@@ -50,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
     private final int CAMERA_REQUEST_CODE = 101;
     FirebaseDatabase db;
     DatabaseReference ref;
-    boolean booked;
+    boolean booked, bookedGuard;
     String email;
+    String currentUID;
+    String studentUID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +67,10 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        String currentUID = currentUser != null ? currentUser.getUid() : "-1";
+
+        currentUID = currentUser != null ? currentUser.getUid() : "-1";
         booked = false;
+        bookedGuard = false;
 
         db = FirebaseDatabase.getInstance();
         ref = db.getReference().child("Users");
@@ -105,42 +109,16 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
 
                         try {
-                            int scannedCycleNum = Integer.parseInt(result.getText());
-                            if (scannedCycleNum > 0 && scannedCycleNum <= 100) {
-
-    //                        This is done to check if the cycle number has already been booked
-                                Query q = ref.orderByChild("cycleTaken").equalTo(result.getText());
-                                q.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        for (DataSnapshot datasnapshot : snapshot.getChildren()) {
-                                            if (datasnapshot.exists()) {
-                                                //cycle number already exists in DB. i.e. cycle already taken by someone
-                                                booked = true;
-                                            }
-                                        }
-
-                                        if (booked) {
-                                            Toast.makeText(MainActivity.this, "Cycle Already booked. Please Scan again!!", Toast.LENGTH_LONG).show();
-                                            booked = !booked;
-                                        } else {
-                                            ref.child(currentUID).child("cycleTaken").setValue(result.getText());
-
-                                            Intent intent = new Intent(MainActivity.this, RideBookedActivity.class);
-    //                                    intent.putExtra("cycle", result.getText());
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                    }
-                                });
-
+                            if(email.equals("abhimishra2775@gmail.com") || email.equals("spandey4122@gmail.com")){
+                                guardScan(result);
                             }
-                        } catch (NumberFormatException e) {
+                            else{
+                                studentScan(result);
+                            }
+
+                        }
+
+                        catch (NumberFormatException e) {
 //                            e.printStackTrace();
                             Toast.makeText(MainActivity.this, "Invalid QR", Toast.LENGTH_LONG).show();
                         }
@@ -156,6 +134,83 @@ public class MainActivity extends AppCompatActivity {
                 codeScanner.startPreview();
             }
         });
+    }
+
+    private void guardScan(Result result) {
+        int scannedCycleNum = Integer.parseInt(result.getText());
+        if (scannedCycleNum > 0 && scannedCycleNum <= 100) {
+
+            //                        This is done to check if the cycle number has already been booked
+            Query q = ref.orderByChild("cycleTaken").equalTo(result.getText());
+            q.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    for (DataSnapshot datasnapshot : snapshot.getChildren()) {
+                        if (datasnapshot.exists()) {
+                            //cycle number already exists in DB. i.e. cycle already taken by someone
+
+                            studentUID = Objects.requireNonNull(datasnapshot.child("uid").getValue()).toString();
+                            bookedGuard = true;
+                        }
+                    }
+
+                    if (bookedGuard) {
+//                        Toast.makeText(MainActivity.this, studentUID, Toast.LENGTH_SHORT).show();
+                        FirebaseDatabase.getInstance().getReference("Users").child(studentUID).child("cycleTaken").setValue("-1");
+                        Toast.makeText(MainActivity.this, "Cycle "+result.getText()+" returned.", Toast.LENGTH_LONG).show();
+                        bookedGuard = !bookedGuard;
+                    } else {
+                        Toast.makeText(MainActivity.this, "This cycle is not booked by anyone.", Toast.LENGTH_LONG).show();
+//
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        }
+    }
+
+    public void studentScan(Result result){
+            int scannedCycleNum = Integer.parseInt(result.getText());
+            if (scannedCycleNum > 0 && scannedCycleNum <= 100) {
+
+                //                        This is done to check if the cycle number has already been booked
+                Query q = ref.orderByChild("cycleTaken").equalTo(result.getText());
+                q.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot datasnapshot : snapshot.getChildren()) {
+                            if (datasnapshot.exists()) {
+                                //cycle number already exists in DB. i.e. cycle already taken by someone
+                                booked = true;
+                            }
+                        }
+
+                        if (booked) {
+                            Toast.makeText(MainActivity.this, "Cycle Already booked. Please Scan again!!", Toast.LENGTH_LONG).show();
+                            booked = !booked;
+                        } else {
+                            ref.child(currentUID).child("cycleTaken").setValue(result.getText());
+
+                            Intent intent = new Intent(MainActivity.this, RideBookedActivity.class);
+                            //                                    intent.putExtra("cycle", result.getText());
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+            }
     }
 
     @Override

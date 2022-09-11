@@ -50,11 +50,18 @@ public class ProfileActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
 
-                        name = Objects.requireNonNull(snapshot.child("name").getValue()).toString();
-                        rollNo = Objects.requireNonNull(snapshot.child("roll_No").getValue()).toString();
-                        session = Objects.requireNonNull(snapshot.child("session").getValue()).toString();
-                        branch = Objects.requireNonNull(snapshot.child("branch").getValue()).toString();
                         email = Objects.requireNonNull(snapshot.child("email").getValue()).toString();
+
+                        if(email.equals("abhimishra2775@gmail.com") || email.equals("spandey4122@gmail.com")){
+                            name = Objects.requireNonNull(snapshot.child("name").getValue()).toString();
+                        }
+                        else {
+                            name = Objects.requireNonNull(snapshot.child("name").getValue()).toString();
+                            rollNo = Objects.requireNonNull(snapshot.child("roll_No").getValue()).toString();
+                            session = Objects.requireNonNull(snapshot.child("session").getValue()).toString();
+                            branch = Objects.requireNonNull(snapshot.child("branch").getValue()).toString();
+                        }
+
 
                         tvName.setText(name);
                         tvRollNo.setText(String.format("Roll-No: %s", rollNo));

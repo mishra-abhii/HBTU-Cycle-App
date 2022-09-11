@@ -1,18 +1,19 @@
 package com.hbtu.cycleapp.model;
 
 public class User {
-    String Name, Email, Branch, Roll_No, Session;
+    String Name, Email, Branch, Roll_No, Session, Uid;
     String cycleTaken;
 
 //    public User() {}
 
-    public User(String name, String email, String branch, String roll_no, String year, String cycleTaken) {
+    public User(String name, String email, String branch, String roll_no, String year, String cycleTaken, String Uid) {
         this.Name = name;
         this.Email = email;
         this.Branch = branch;
         this.Roll_No = roll_no;
         this.Session = year;
         this.cycleTaken = cycleTaken;
+        this.Uid = Uid;
     }
 
     public String getName() {
@@ -39,4 +40,7 @@ public class User {
         return cycleTaken;
     }
 
+    public String getUid() {
+        return Uid;
+    }
 }

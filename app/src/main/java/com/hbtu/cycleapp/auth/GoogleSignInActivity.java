@@ -144,61 +144,64 @@ public class GoogleSignInActivity extends AppCompatActivity {
             GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
             if(account!=null){
 
-                name = account.getGivenName();
-                email = account.getEmail();
+                if(!email.equals("abhimishra2775@gmail.com") && !email.equals("spandey4122@gmail.com")) {
 
-                assert email != null;
-                String branchCode = email.substring(4, 6);
-                if(branchCode.equals("01")){
-                    branch = "Bio-Chemical Engineering";
-                }
-                if(branchCode.equals("02")){
-                    branch = "Civil Engineering";
-                }
-                if(branchCode.equals("03")){
-                    branch = "Chemical Engineering";
-                }
-                if(branchCode.equals("04")){
-                    branch = "Computer Science Engineering";
-                }
-                if(branchCode.equals("05")){
-                    branch = "Electrical Engineering";
-                }
-                if(branchCode.equals("06")){
-                    branch = "Electronics Engineering";
-                }
-                if(branchCode.equals("07")){
-                    branch = "Food Technology";
-                }
-                if(branchCode.equals("08")){
-                    branch = "Information Technology";
-                }
-                if(branchCode.equals("09")){
-                    branch = "Leather Technology";
-                }
-                if(branchCode.equals("10")){
-                    branch = "Mechanical Engineering";
-                }
-                if(branchCode.equals("11")){
-                    branch = "Oil Technology";
-                }
-                if(branchCode.equals("12")){
-                    branch = "Plastic Technology";
-                }
-                if(branchCode.equals("13")){
-                    branch = "Paint Technology";
-                }
+                    name = account.getGivenName();
+                    email = account.getEmail();
 
-                roll_no = email.substring(0, 9);
+                    assert email != null;
+                    String branchCode = email.substring(4, 6);
+                    if (branchCode.equals("01")) {
+                        branch = "Bio-Chemical Engineering";
+                    }
+                    if (branchCode.equals("02")) {
+                        branch = "Civil Engineering";
+                    }
+                    if (branchCode.equals("03")) {
+                        branch = "Chemical Engineering";
+                    }
+                    if (branchCode.equals("04")) {
+                        branch = "Computer Science Engineering";
+                    }
+                    if (branchCode.equals("05")) {
+                        branch = "Electrical Engineering";
+                    }
+                    if (branchCode.equals("06")) {
+                        branch = "Electronics Engineering";
+                    }
+                    if (branchCode.equals("07")) {
+                        branch = "Food Technology";
+                    }
+                    if (branchCode.equals("08")) {
+                        branch = "Information Technology";
+                    }
+                    if (branchCode.equals("09")) {
+                        branch = "Leather Technology";
+                    }
+                    if (branchCode.equals("10")) {
+                        branch = "Mechanical Engineering";
+                    }
+                    if (branchCode.equals("11")) {
+                        branch = "Oil Technology";
+                    }
+                    if (branchCode.equals("12")) {
+                        branch = "Plastic Technology";
+                    }
+                    if (branchCode.equals("13")) {
+                        branch = "Paint Technology";
+                    }
 
-                String yearCode = email.substring(0, 2);
-                int yearCode1 = Integer.parseInt(yearCode)+4;
-                year = ("20"+yearCode + "-" + "20"+yearCode1);
+                    roll_no = email.substring(0, 9);
 
-                cycleTaken = CYCLE_NOT_TAKEN;
+                    String yearCode = email.substring(0, 2);
+                    int yearCode1 = Integer.parseInt(yearCode) + 4;
+                    year = ("20" + yearCode + "-" + "20" + yearCode1);
 
-                User user = new User(name, email, branch, roll_no, year, cycleTaken);
-                mRef.setValue(user);
+                    cycleTaken = CYCLE_NOT_TAKEN;
+
+                    User user = new User(name, email, branch, roll_no, year, cycleTaken, currentUserId);
+                    mRef.setValue(user);
+                }
             }
         }
     }
