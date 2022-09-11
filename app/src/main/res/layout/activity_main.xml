@@ -8,22 +8,21 @@
 
     <LinearLayout
         android:id="@+id/topLL"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#58B449"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/codescanner"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:fontFamily="monospace"
             android:gravity="center"
-            android:padding="8dp"
+            android:padding="5dp"
             android:text="Scan the QR code on Cycle to book your ride!"
             android:textColor="@color/black"
             android:textSize="28sp"
@@ -33,15 +32,17 @@
 
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/codescanner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:autoFocusButtonColor="@color/white"
         app:autoFocusButtonVisible="true"
         app:flashButtonColor="@color/white"
         app:flashButtonVisible="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topLL"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topLL"
         app:maskColor="#80000000" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

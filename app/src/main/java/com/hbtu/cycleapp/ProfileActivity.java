@@ -31,6 +31,8 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        getSupportActionBar().hide();
+
         tvName = findViewById(R.id.tvName);
         tvRollNo = findViewById(R.id.tvRollNo);
         tvSession = findViewById(R.id.tvYear);

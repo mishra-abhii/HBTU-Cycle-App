@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:layout_margin="15dp"
+    android:background="@color/appTheme"
     android:orientation="vertical"
     tools:context=".ProfileActivity">
 
@@ -16,80 +16,108 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="100dp">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/cyclelogo" />
+        </androidx.cardview.widget.CardView>
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
+            android:fontFamily="monospace"
             android:gravity="center"
             android:padding="4dp"
             android:text="Profile "
-            android:textSize="40sp" />
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center|start"
-            android:padding="5dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/buttons"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:padding="7dp"
             android:text="Name"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textColor="@color/white"
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/tvRollNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center|start"
-            android:padding="5dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/buttons"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:padding="7dp"
             android:text="Roll Number"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textColor="@color/white"
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/tvYear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center|start"
-            android:padding="5dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/buttons"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:padding="7dp"
             android:text="Session"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textColor="@color/white"
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/tvBranch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center|start"
-            android:padding="5dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/buttons"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:padding="7dp"
             android:text="Branch"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textColor="@color/white"
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/tvEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="25dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center|start"
-            android:padding="5dp"
+            android:layout_marginEnd="25dp"
+            android:background="@drawable/buttons"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:padding="7dp"
             android:text="Email"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textColor="@color/white"
+            android:textSize="22sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -104,10 +132,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="6dp"
+            android:fontFamily="monospace"
             android:gravity="center"
             android:padding="3dp"
             android:text="Green Rides"
-            android:textSize="18sp" />
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>

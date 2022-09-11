@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -42,7 +43,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
     private int cycleTaken;
     private final int CYCLE_NOT_TAKEN = -1;
 
-    Button btnSignIn;
+    TextView btnSignIn;
     ProgressDialog progressDialog;
 
     @Override
