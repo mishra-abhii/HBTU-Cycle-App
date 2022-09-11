@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+
         <entry key="app/src/main/res/drawable/buttons.xml" value="0.1945" />
         <entry key="app/src/main/res/drawable/edittext.xml" value="0.1945" />
         <entry key="app/src/main/res/drawable/shapebtn.xml" value="0.1945" />
@@ -11,6 +12,12 @@
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/activity_ride_booked.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2078125" />
+
+        <entry key="app/src/main/res/layout/activity_google_sign_in.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_ride_booked.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.35520833333333335" />
+
       </map>
     </option>
   </component>
