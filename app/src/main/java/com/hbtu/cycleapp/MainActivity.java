@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     GoogleSignInClient gsc;
     private CodeScanner codeScanner;
     private final int CAMERA_REQUEST_CODE = 101;
+    FirebaseDatabase db;
+    DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String currentUID = currentUser!= null ? currentUser.getUid() : "-1";
+
+        db = FirebaseDatabase.getInstance();
+        ref = db.getReference().child("Users").child(currentUID);
+
+
         CodeScannerView codeScannerView = findViewById(R.id.codescanner);
         codeScanner = new CodeScanner(this, codeScannerView);
         codeScanner.setDecodeCallback(new DecodeCallback() {
@@ -60,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        Toast.makeText(MainActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(MainActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+                        ref.child("cycleTaken").setValue(result.getText());
                     }
                 });
             }
@@ -163,11 +172,11 @@ public class MainActivity extends AppCompatActivity {
     //This will give us result of above makeRequest, that is when we made request for a permission
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (grantResults == null || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Give CAM permissions....", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 //successful
             }
         }

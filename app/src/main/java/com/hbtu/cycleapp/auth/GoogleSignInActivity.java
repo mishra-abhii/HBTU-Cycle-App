@@ -39,6 +39,8 @@ public class GoogleSignInActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     DatabaseReference mRef;
     String name, email, branch, roll_no, year;
+    private int cycleTaken;
+    private final int CYCLE_NOT_TAKEN = -1;
 
     Button btnSignIn;
     ProgressDialog progressDialog;
@@ -190,7 +192,8 @@ public class GoogleSignInActivity extends AppCompatActivity {
                 int yearCode1 = Integer.parseInt(yearCode)+4;
                 year = ("20"+yearCode + "-" + "20"+yearCode1);
 
-                User user = new User(name, email, branch, roll_no, year);
+                cycleTaken = CYCLE_NOT_TAKEN;
+                User user = new User(name, email, branch, roll_no, year, cycleTaken);
                 mRef.setValue(user);
             }
         }
