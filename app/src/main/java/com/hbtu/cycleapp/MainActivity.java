@@ -102,38 +102,48 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-//                        This is done to check if the cycle number has already been booked
-                        Query q = ref.orderByChild("cycleTaken").equalTo(result.getText());
-                        q.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot datasnapshot : snapshot.getChildren()) {
-                                    if (datasnapshot.exists()) {
-                                        //cycle number already exists in DB. i.e. cycle already taken by someone
-                                        booked = true;
+                        try {
+                            int scannedCycleNum = Integer.parseInt(result.getText());
+                            if (scannedCycleNum > 0 && scannedCycleNum <= 100) {
+
+    //                        This is done to check if the cycle number has already been booked
+                                Query q = ref.orderByChild("cycleTaken").equalTo(result.getText());
+                                q.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        for (DataSnapshot datasnapshot : snapshot.getChildren()) {
+                                            if (datasnapshot.exists()) {
+                                                //cycle number already exists in DB. i.e. cycle already taken by someone
+                                                booked = true;
+                                            }
+                                        }
+
+                                        if (booked) {
+                                            Toast.makeText(MainActivity.this, "Cycle Already booked. Please Scan again!!", Toast.LENGTH_LONG).show();
+                                            booked = !booked;
+                                        } else {
+                                            ref.child(currentUID).child("cycleTaken").setValue(result.getText());
+
+                                            Intent intent = new Intent(MainActivity.this, RideBookedActivity.class);
+    //                                    intent.putExtra("cycle", result.getText());
+                                            startActivity(intent);
+                                            finish();
+                                        }
                                     }
-                                }
 
-                                if (booked) {
-                                    Toast.makeText(MainActivity.this, "Cycle Already booked. Please Scan again!!", Toast.LENGTH_LONG).show();
-                                    booked = !booked;
-                                } else {
-                                    ref.child(currentUID).child("cycleTaken").setValue(result.getText());
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                    Intent intent = new Intent(MainActivity.this, RideBookedActivity.class);
-//                                    intent.putExtra("cycle", result.getText());
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
+                                    }
+                                });
 
                             }
-                        });
-
+                        } catch (NumberFormatException e) {
+//                            e.printStackTrace();
+                            Toast.makeText(MainActivity.this, "Invalid QR", Toast.LENGTH_LONG).show();
+                        }
                     }
+
                 });
             }
         });
