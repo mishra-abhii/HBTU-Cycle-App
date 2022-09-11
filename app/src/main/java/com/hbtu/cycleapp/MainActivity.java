@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         Toast.makeText(MainActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
                         ref.child("cycleTaken").setValue(result.getText());
+                        Intent intent = new Intent(MainActivity.this, RideBookedActivity.class);
+                        startActivity(intent);
                     }
                 });
             }
@@ -176,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (grantResults == null || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Give CAM permissions....", Toast.LENGTH_SHORT).show();
+                finish();
             } else {
                 //successful
             }
