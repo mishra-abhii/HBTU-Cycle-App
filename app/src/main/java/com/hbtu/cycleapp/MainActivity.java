@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
                         ref.child("cycleTaken").setValue(result.getText());
                         Intent intent = new Intent(MainActivity.this, RideBookedActivity.class);
+                        intent.putExtra("cycle", result.getText());
                         startActivity(intent);
                     }
                 });

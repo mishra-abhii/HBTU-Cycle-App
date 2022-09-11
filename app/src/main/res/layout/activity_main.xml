@@ -25,7 +25,7 @@
             android:gravity="center"
             android:padding="8dp"
             android:text="Scan the QR code on Cycle to book your ride!"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="28sp"
             android:textStyle="bold" />
 
