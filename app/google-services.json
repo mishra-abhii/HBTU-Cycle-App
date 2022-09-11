@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1080618422499",
+    "project_id": "hbtu-cycle-app",
+    "storage_bucket": "hbtu-cycle-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080618422499:android:aecd6ff06fa78195eab5d6",
+        "android_client_info": {
+          "package_name": "com.hbtu.cycleapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080618422499-1ktvqq84f7gf6dqjtrr9090ntke597l6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrSZL6MiBYHHp8OPmjCOuZutfTDejaVb8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080618422499-1ktvqq84f7gf6dqjtrr9090ntke597l6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
